@@ -9,6 +9,14 @@ void setup() {
   pinMode(VEHICLE_RED_BOTTOM, OUTPUT);
   pinMode(VEHICLE_AMBER_BOTTOM, OUTPUT);
   pinMode(VEHICLE_GREEN_BOTTOM, OUTPUT);
+
+  // Set pedestrian light pins as outputs and beg buttons as inputs
+  pinMode(PED_RED_RIGHT, OUTPUT);
+  pinMode(PED_GREEN_RIGHT, OUTPUT);
+  pinMode(BUTTON_RIGHT, INPUT);
+  pinMode(PED_RED_LEFT, OUTPUT);
+  pinMode(PED_GREEN_LEFT, OUTPUT);
+  pinMode(BUTTON_LEFT, INPUT);
 }
 
 void loop() {
