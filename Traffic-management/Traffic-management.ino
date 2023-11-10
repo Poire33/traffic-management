@@ -21,7 +21,9 @@ void setup() {
 
 void loop() {
   vehicle_green();
+  ped_red();
   delay(6000); // Represents delay while the lights in that specific direction are green
   vehicle_red();
+  ped_green();
   delay(6000); // Represents delay while the lights in that specific direction are red
 }

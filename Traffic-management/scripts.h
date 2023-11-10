@@ -1,4 +1,4 @@
-// This is the header file for all repeatable and pre-defined patters in the traffic management system.
+// This is the header file for all repeatable and pre-defined patterns in the traffic management system.
 
 // Set pins for traffic lights
 #define VEHICLE_RED_TOP 32
