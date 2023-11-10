@@ -9,15 +9,14 @@
 #define VEHICLE_GREEN_BOTTOM 13
 
 // Set pins for pedestrian beg buttons and lights
-// Change below pin numbers when design decided, sample pin numbers for now
-#define PED_RED_RIGHT 1
+#define PED_RED_RIGHT 0
 #define PED_GREEN_RIGHT 2
-#define BUTTON_RIGHT 3
+#define BUTTON_RIGHT 15
 #define BUTTON_LED_RIGHT 4
-#define PED_RED_LEFT 5
-#define PED_GREEN_LEFT 6
-#define BUTTON_LEFT 7
-#define BUTTON_LED_LEFT 8
+#define PED_RED_LEFT 23
+#define PED_GREEN_LEFT 22
+#define BUTTON_LEFT 21
+#define BUTTON_LED_LEFT 19
 
 
 void vehicle_red() {
