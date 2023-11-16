@@ -13,17 +13,22 @@ void setup() {
   // Set pedestrian light pins as outputs and beg buttons as inputs
   pinMode(PED_RED_RIGHT, OUTPUT);
   pinMode(PED_GREEN_RIGHT, OUTPUT);
+  pinMode(BUTTON_LED_RIGHT, OUTPUT);
   pinMode(BUTTON_RIGHT, INPUT);
   pinMode(PED_RED_LEFT, OUTPUT);
   pinMode(PED_GREEN_LEFT, OUTPUT);
+  pinMode(BUTTON_LED_LEFT, OUTPUT);
   pinMode(BUTTON_LEFT, INPUT);
 }
 
 void loop() {
-  vehicle_green();
-  ped_red();
+  check_vehicles();
+  /*
+  Old code
+
   delay(6000); // Represents delay while the lights in that specific direction are green
   vehicle_red();
   ped_green();
   delay(6000); // Represents delay while the lights in that specific direction are red
+  */
 }

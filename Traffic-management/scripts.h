@@ -55,14 +55,15 @@ void ped_green() {
 }
 
 void beg_button() {
-  if(digitalRead(BUTTON_RIGHT) == LOW || digitalRead(BUTTON_LEFT) == LOW) {
+  if(digitalRead(BUTTON_RIGHT) == HIGH || digitalRead(BUTTON_LEFT) == HIGH) {
     digitalWrite(BUTTON_LED_RIGHT, HIGH);
     digitalWrite(BUTTON_LED_LEFT, HIGH);
+    // Insert possible delay here when using HC-SR04 to detect cyclists and motor vehicles; in any case, limit delay to about 10s
     vehicle_red();
     delay(2000);
-    ped_green();
     digitalWrite(BUTTON_LED_RIGHT, LOW);
     digitalWrite(BUTTON_LED_LEFT, LOW);
+    ped_green();
     delay(17000);
     ped_red();
     delay(2000);
@@ -71,6 +72,8 @@ void beg_button() {
 }
 
 void check_vehicles() {
+  vehicle_green();
+  ped_red();
+  delay(10000);
   beg_button();
-  
 }
