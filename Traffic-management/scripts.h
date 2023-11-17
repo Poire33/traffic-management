@@ -74,6 +74,6 @@ void beg_button() {
 void check_vehicles() {
   vehicle_green();
   ped_red();
-  delay(10000);
-  beg_button();
+  delay(10000); // Use interrupts to break out of the delay
+  beg_button(); // Used exclusively to turn the pedestrian side to green for now
 }
