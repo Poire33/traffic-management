@@ -18,7 +18,6 @@
 #define BUTTON_LEFT 21
 #define BUTTON_LED_LEFT 19
 
-
 void vehicle_red() {
   // Turn vehicle traffic lights red
 
@@ -55,25 +54,47 @@ void ped_green() {
 }
 
 void beg_button() {
-  if(digitalRead(BUTTON_RIGHT) == HIGH || digitalRead(BUTTON_LEFT) == HIGH) {
-    digitalWrite(BUTTON_LED_RIGHT, HIGH);
-    digitalWrite(BUTTON_LED_LEFT, HIGH);
-    // Insert possible delay here when using HC-SR04 to detect cyclists and motor vehicles; in any case, limit delay to about 10s
-    vehicle_red();
-    delay(2000);
-    digitalWrite(BUTTON_LED_RIGHT, LOW);
-    digitalWrite(BUTTON_LED_LEFT, LOW);
-    ped_green();
-    delay(17000);
-    ped_red();
-    delay(2000);
-    vehicle_green();
-  }
+  Serial.println("Beg button function");
+  digitalWrite(BUTTON_LED_RIGHT, HIGH);
+  digitalWrite(BUTTON_LED_LEFT, HIGH);
+  // Insert delay here when using HC-SR04 to detect cyclists and motor vehicles; in any case, limit delay to about 10s
+  vehicle_red();
+  delay(2000);
+  digitalWrite(BUTTON_LED_RIGHT, LOW);
+  digitalWrite(BUTTON_LED_LEFT, LOW);
+  ped_green();
+  delay(17000);
+  ped_red();
+  delay(2000);
+  vehicle_green();
+}
+
+// Respond to presses of the beg button; have right and left hand sides different if applicable (mainly if there is a refuge island)
+void IRAM_ATTR right_beg() {
+  /* beg_button();
+  digitalWrite(VEHICLE_GREEN_TOP, HIGH);
+  digitalWrite(VEHICLE_GREEN_BOTTOM, HIGH);
+  digitalWrite(VEHICLE_AMBER_TOP, HIGH);
+  digitalWrite(VEHICLE_AMBER_BOTTOM, HIGH);
+  digitalWrite(VEHICLE_RED_TOP, HIGH);
+  digitalWrite(VEHICLE_RED_BOTTOM, HIGH);
+  digitalWrite(PED_RED_RIGHT, HIGH);
+  digitalWrite(PED_RED_LEFT, HIGH);
+  digitalWrite(PED_GREEN_RIGHT, HIGH);
+  digitalWrite(PED_GREEN_LEFT, HIGH);
+  digitalWrite(BUTTON_LED_RIGHT, HIGH);
+  digitalWrite(BUTTON_LED_LEFT, HIGH);
+  delay(3000);
+  */
+}
+
+void IRAM_ATTR left_beg() {
+  beg_button();
 }
 
 void check_vehicles() {
   vehicle_green();
   ped_red();
   delay(10000); // Use interrupts to break out of the delay
-  beg_button(); // Used exclusively to turn the pedestrian side to green for now
+  beg_button(); // Used exclusively to turn the pedestrian side to green for now (comment out line to use beg buttons "properly")
 }
