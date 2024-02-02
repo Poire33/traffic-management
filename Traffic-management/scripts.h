@@ -18,6 +18,10 @@
 #define BUTTON_LEFT 21
 #define BUTTON_LED_LEFT 19
 
+// Set pins for sensors, see slide 20+ for code
+#define TRIG 12
+#define ECHO 35
+
 void vehicle_red() {
   // Turn vehicle traffic lights red
 
