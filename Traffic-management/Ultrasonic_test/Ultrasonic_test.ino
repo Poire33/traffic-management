@@ -64,6 +64,7 @@ void loop() {
   Serial.print("Nearest vehicle at ");
   Serial.print(cms);
   Serial.print(" cm");
+  delay(500);
 
   // if statement placeholder for interrupt
   if (cms < distance) {
