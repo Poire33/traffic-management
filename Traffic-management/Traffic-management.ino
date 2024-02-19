@@ -25,8 +25,8 @@ void setup() {
   pinMode(ECHO, INPUT);
 
   // Configure interrupts for pedestrian beg buttons
-  // attachInterrupt(BUTTON_RIGHT, right_beg, HIGH);
-  // attachInterrupt(BUTTON_LEFT, left_beg, HIGH); -- An empty attachInterrupt doesn't cause any problems but once beg_button(); or other code is added, the board constantly reboots. When the function is set to LOW, nothing happens when the button is pressed. No rebooting.
+  // attachInterrupt(digitalPinToInterrupt(BUTTON_RIGHT), right_beg, HIGH);
+  // attachInterrupt(digitalPinToInterrupt(BUTTON_LEFT), left_beg, HIGH); -- An empty attachInterrupt doesn't cause any problems but once beg_button(); or other code is added, the board constantly reboots. When the function is set to LOW, nothing happens when the button is pressed. No rebooting.
 }
 
 void loop() {

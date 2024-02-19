@@ -74,7 +74,7 @@ void beg_button() {
 }
 
 // Respond to presses of the beg button; have right and left hand sides different if applicable (mainly if there is a refuge island)
-void IRAM_ATTR right_beg() {
+void right_beg() {
   /* beg_button();
   digitalWrite(VEHICLE_GREEN_TOP, HIGH);
   digitalWrite(VEHICLE_GREEN_BOTTOM, HIGH);
@@ -92,7 +92,7 @@ void IRAM_ATTR right_beg() {
   */
 }
 
-void IRAM_ATTR left_beg() {
+void left_beg() {
   beg_button();
 }
 
