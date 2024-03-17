@@ -1,4 +1,4 @@
-// This is the header file for all repeatable and pre-defined patters in the traffic management system.
+// This is the header file for all repeatable and pre-defined patterns in the traffic management system.
 
 // Set pins for traffic lights
 #define VEHICLE_RED_TOP 32
@@ -9,16 +9,18 @@
 #define VEHICLE_GREEN_BOTTOM 13
 
 // Set pins for pedestrian beg buttons and lights
-// Change below pin numbers when design decided, sample pin numbers for now
-#define PED_RED_RIGHT 1
+#define PED_RED_RIGHT 0
 #define PED_GREEN_RIGHT 2
-#define BUTTON_RIGHT 3
+#define BUTTON_RIGHT 15
 #define BUTTON_LED_RIGHT 4
-#define PED_RED_LEFT 5
-#define PED_GREEN_LEFT 6
-#define BUTTON_LEFT 7
-#define BUTTON_LED_LEFT 8
+#define PED_RED_LEFT 23
+#define PED_GREEN_LEFT 22
+#define BUTTON_LEFT 21
+#define BUTTON_LED_LEFT 19
 
+// Set pins for sensors, see slide 20+ for code
+#define TRIG 12
+#define ECHO 35
 
 void vehicle_red() {
   // Turn vehicle traffic lights red
@@ -56,22 +58,45 @@ void ped_green() {
 }
 
 void beg_button() {
-  if(digitalRead(BUTTON_RIGHT) == LOW || digitalRead(BUTTON_LEFT) == LOW) {
-    digitalWrite(BUTTON_LED_RIGHT, HIGH);
-    digitalWrite(BUTTON_LED_LEFT, HIGH);
-    vehicle_red();
-    delay(2000);
-    ped_green();
-    digitalWrite(BUTTON_LED_RIGHT, LOW);
-    digitalWrite(BUTTON_LED_LEFT, LOW);
-    delay(17000);
-    ped_red();
-    delay(2000);
-    vehicle_green();
-  }
+  Serial.println("Beg button function");
+  digitalWrite(BUTTON_LED_RIGHT, HIGH);
+  digitalWrite(BUTTON_LED_LEFT, HIGH);
+  // Insert delay here when using HC-SR04 to detect cyclists and motor vehicles; in any case, limit delay to about 10s
+  vehicle_red();
+  delay(2000);
+  digitalWrite(BUTTON_LED_RIGHT, LOW);
+  digitalWrite(BUTTON_LED_LEFT, LOW);
+  ped_green();
+  delay(17000);
+  ped_red();
+  delay(2000);
+  vehicle_green();
+}
+
+// Respond to presses of the beg button; have right and left hand sides different if applicable (mainly if there is a refuge island). No delays allowed in interrupts, except delayMicroseconds()
+void right_beg() {
+  // Test code using RHS beg button, otherwise use beg_button();
+  digitalWrite(VEHICLE_GREEN_TOP, HIGH);
+  digitalWrite(VEHICLE_GREEN_BOTTOM, HIGH);
+  digitalWrite(VEHICLE_AMBER_TOP, HIGH);
+  digitalWrite(VEHICLE_AMBER_BOTTOM, HIGH);
+  digitalWrite(VEHICLE_RED_TOP, HIGH);
+  digitalWrite(VEHICLE_RED_BOTTOM, HIGH);
+  digitalWrite(PED_RED_RIGHT, HIGH);
+  digitalWrite(PED_RED_LEFT, HIGH);
+  digitalWrite(PED_GREEN_RIGHT, HIGH);
+  digitalWrite(PED_GREEN_LEFT, HIGH);
+  digitalWrite(BUTTON_LED_RIGHT, HIGH);
+  digitalWrite(BUTTON_LED_LEFT, HIGH);
+}
+
+void left_beg() {
+  beg_button();
 }
 
 void check_vehicles() {
-  beg_button();
-  
+  vehicle_green();
+  ped_red();
+  delay(10000); // Use interrupts to break out of the delay
+  beg_button(); // Used exclusively to turn the pedestrian side to green for now (comment out line to use beg buttons "properly")
 }
